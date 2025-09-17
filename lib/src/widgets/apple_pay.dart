@@ -8,19 +8,19 @@ import 'dart:convert';
 class ApplePay extends StatefulWidget {
   ApplePay(
       {super.key,
-      required this.config,
-      required this.onPaymentResult,
-      this.buttonType = ApplePayButtonType.inStore,
-      this.buttonStyle = ApplePayButtonStyle.black})
+        required this.config,
+        required this.onPaymentResult,
+        this.buttonType = ApplePayButtonType.inStore,
+        this.buttonStyle = ApplePayButtonStyle.black})
       : assert(config.applePay != null,
-            "Please add applePayConfig when instantiating the paymentConfig.");
+  "Please add applePayConfig when instantiating the paymentConfig.");
 
   final PaymentConfig config;
   final Function onPaymentResult;
   final ApplePayButtonType buttonType;
   final ApplePayButtonStyle buttonStyle;
   final MethodChannel channel =
-      const MethodChannel('flutter.moyasar.com/apple_pay');
+  const MethodChannel('flutter.moyasar.com/apple_pay');
 
   @override
   State<ApplePay> createState() => _ApplePayState();
@@ -34,7 +34,7 @@ class _ApplePayState extends State<ApplePay> {
   @override
   void initState() {
     widget.channel.invokeMethod<bool>("isApplePayAvailable", {
-      "supportedNetworks": widget.config.supportedNetworks.map((e) => e.toJson()).toList()
+      "supportedNetworks": widget.config.supportedNetworksAsStrings
     }).then((isApplePayAvailableCheckFlag) {
       if (isApplePayAvailableCheckFlag != null &&
           !isApplePayAvailableCheckFlag) {
@@ -44,7 +44,7 @@ class _ApplePayState extends State<ApplePay> {
         });
       }
     }).catchError(
-      (error) {
+          (error) {
         debugPrint("Apple Pay availability check failed: $error");
       },
     );
@@ -53,10 +53,16 @@ class _ApplePayState extends State<ApplePay> {
   }
 
   void onApplePayError() {
+    print("❌❌❌❌❌❌❌❌❌❌");
     widget.onPaymentResult(PaymentCanceledError());
+    print("❌❌❌❌❌❌❌❌❌❌");
   }
 
   void onApplePayResult(paymentResult) async {
+    print("🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀");
+    print(widget.config.supportedNetworksAsStrings);
+    print("🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀");
+
     final token = paymentResult['token'];
 
     if (((token ?? '') == '')) {
@@ -83,7 +89,7 @@ class _ApplePayState extends State<ApplePay> {
           "displayName": "${widget.config.applePay?.label}",
           "merchantCapabilities": ${jsonEncode(widget.config.applePay?.merchantCapabilities)},
           "supportedCountries": ${jsonEncode(widget.config.applePay?.supportedCountries)},
-          "supportedNetworks": ${jsonEncode(widget.config.supportedNetworks.map((e) => e.toJson()).toList())},
+          "supportedNetworks": ${jsonEncode(widget.config.supportedNetworksAsStrings)},
           "countryCode": "SA",
           "currencyCode": "SAR"
         }
@@ -96,7 +102,7 @@ class _ApplePayState extends State<ApplePay> {
       "paymentLabel": "${widget.config.applePay?.label}",
       "merchantCapabilities": widget.config.applePay?.merchantCapabilities,
       "supportedCountries": widget.config.applePay?.supportedCountries,
-      "supportedNetworks": widget.config.supportedNetworks.map((e) => e.toJson()).toList(),
+      "supportedNetworks": widget.config.supportedNetworksAsStrings,
       "countryCode": "SA",
       "currencyCode": "SAR",
       "paymentAmount": (widget.config.amount / 100).toStringAsFixed(2)
@@ -109,45 +115,45 @@ class _ApplePayState extends State<ApplePay> {
     // TODO: Should only use the native widget later on when it's more stable.
     return isApplePayAvailable
         ? ApplePayButton(
-            paymentConfiguration:
-                PaymentConfiguration.fromJsonString(createConfigString()),
-            paymentItems: [
-              PaymentItem(
-                label: widget.config.applePay!.label,
-                amount: (widget.config.amount / 100).toStringAsFixed(2),
-              )
-            ],
-            type: widget.buttonType,
-            style: widget.buttonStyle,
-            onPaymentResult: onApplePayResult,
-            width: MediaQuery.of(context).size.width,
-            height: 40,
-            onError: (_) {
-              onApplePayError();
-            },
-            loadingIndicator: const Center(
-              child: CircularProgressIndicator(),
-            ),
-          )
+      paymentConfiguration:
+      PaymentConfiguration.fromJsonString(createConfigString()),
+      paymentItems: [
+        PaymentItem(
+          label: widget.config.applePay!.label,
+          amount: (widget.config.amount / 100).toStringAsFixed(2),
+        )
+      ],
+      type: widget.buttonType,
+      style: widget.buttonStyle,
+      onPaymentResult: onApplePayResult,
+      width: MediaQuery.of(context).size.width,
+      height: 40,
+      onError: (_) {
+        onApplePayError();
+      },
+      loadingIndicator: const Center(
+        child: CircularProgressIndicator(),
+      ),
+    )
         : ConstrainedBox(
-            constraints: BoxConstraints.tightFor(
-              width: MediaQuery.of(context).size.width,
-              height: 40,
-            ),
-            child: UiKitView(
-              viewType: applePayButtonViewNativeId,
-              creationParamsCodec: const StandardMessageCodec(),
-              creationParams: createCustomNativeConfig(),
-              onPlatformViewCreated: (_) {
-                widget.channel.setMethodCallHandler((call) async {
-                  if (call.method == 'onApplePayResult') {
-                    onApplePayResult(call.arguments);
-                  } else if (call.method == 'onApplePayError') {
-                    onApplePayError();
-                  }
-                });
-              },
-            ),
-          );
+      constraints: BoxConstraints.tightFor(
+        width: MediaQuery.of(context).size.width,
+        height: 40,
+      ),
+      child: UiKitView(
+        viewType: applePayButtonViewNativeId,
+        creationParamsCodec: const StandardMessageCodec(),
+        creationParams: createCustomNativeConfig(),
+        onPlatformViewCreated: (_) {
+          widget.channel.setMethodCallHandler((call) async {
+            if (call.method == 'onApplePayResult') {
+              onApplePayResult(call.arguments);
+            } else if (call.method == 'onApplePayError') {
+              onApplePayError();
+            }
+          });
+        },
+      ),
+    );
   }
 }

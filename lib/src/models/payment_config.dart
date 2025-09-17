@@ -52,6 +52,8 @@ class PaymentConfig {
   /// Supported Networks: [PaymentNetwork.amex, PaymentNetwork.visa, PaymentNetwork.mada, PaymentNetwork.masterCard]
   List<PaymentNetwork> supportedNetworks;
 
+  List<String> get supportedNetworksAsStrings => supportedNetworks.map((e) => e.toJson()).toList();
+
   /// The config required to setup Apple Pay.
   ApplePayConfig? applePay;
 
@@ -72,6 +74,7 @@ class PaymentConfig {
       this.creditCard,
       this.givenID})
       : supportedNetworks = (supportedNetworks ?? const [
+          PaymentNetwork.amex,
           PaymentNetwork.visa,
           PaymentNetwork.mada,
           PaymentNetwork.masterCard

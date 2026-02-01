@@ -1,5 +1,6 @@
 import 'package:moyasar/moyasar.dart';
 import 'package:moyasar/src/models/payment_type.dart';
+import 'package:moyasar/src/models/payment_split.dart';
 
 /// Moyasar API response for processing a payment.
 class PaymentResponse {
@@ -25,6 +26,7 @@ class PaymentResponse {
   late String updatedAt;
   Map<String, dynamic>? metadata;
   late dynamic source;
+  List<PaymentSplit>? splits;
 
   PaymentResponse.fromJson(Map<String, dynamic> json, PaymentType paymentType) {
     id = json['id'];
@@ -50,6 +52,12 @@ class PaymentResponse {
 
     if (json['metadata'] != null) {
       metadata = Map<String, dynamic>.from(json['metadata']);
+    }
+
+    if (json['splits'] != null) {
+      splits = (json['splits'] as List)
+          .map((split) => PaymentSplit.fromJson(split as Map<String, dynamic>))
+          .toList();
     }
 
     if (paymentType == PaymentType.creditcard) {
@@ -87,6 +95,9 @@ class PaymentResponse {
     data['updated_at'] = updatedAt;
     if (metadata != null) {
       data['metadata'] = metadata;
+    }
+    if (splits != null) {
+      data['splits'] = splits!.map((split) => split.toJson()).toList();
     }
     if (source != null) {
       if (source is CardPaymentResponseSource) {

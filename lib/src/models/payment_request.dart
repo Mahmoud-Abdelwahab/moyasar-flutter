@@ -12,6 +12,7 @@ class PaymentRequest {
   late PaymentRequestSource source;
   String? givenID;
   String callbackUrl = PaymentConfig.callbackUrl;
+  List<PaymentSplit>? splits;
 
   PaymentRequest(
       PaymentConfig config, PaymentRequestSource paymentRequestSource) {
@@ -21,6 +22,7 @@ class PaymentRequest {
     metadata = config.metadata;
     source = paymentRequestSource;
     givenID = config.givenID;
+    splits = config.splits;
   }
 
   Map<String, dynamic> toJson() => {
@@ -31,5 +33,7 @@ class PaymentRequest {
         'metadata': metadata,
         'callback_url': callbackUrl,
         if (givenID != null) 'given_id': givenID,
+        if (splits != null && splits!.isNotEmpty)
+          'splits': splits!.map((split) => split.toJson()).toList(),
       };
 }

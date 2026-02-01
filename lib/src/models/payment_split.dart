@@ -44,4 +44,16 @@ class PaymentSplit {
         'fee_source': feeSource,
         'refundable': refundable,
       };
+
+  factory PaymentSplit.fromJson(Map<String, dynamic> json) {
+    return PaymentSplit(
+      recipientType: json['recipient_type'] as String?,
+      recipientId: json['recipient_id'] as String,
+      amount: json['amount'] as int,
+      description: json['description'] as String?,
+      reference: json['reference'] as String?,
+      feeSource: json['fee_source'] as bool? ?? false,
+      refundable: json['refundable'] as bool? ?? true,
+    );
+  }
 }

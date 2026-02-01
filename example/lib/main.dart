@@ -39,7 +39,21 @@ class _CoffeeShopState extends State<CoffeeShop> {
           merchantId: 'merchant.com.mysr.apple',
           label: 'Blue Coffee Beans',
           manual: false,
-          saveCard: false));
+          saveCard: false),
+      // splits: [
+      //   PaymentSplit(
+      //       recipientId: "7d2d0797-a2be-40fe-bb1b-1fdec9824c95",
+      //       amount: 8000),
+      //   PaymentSplit(
+      //       recipientId: "327680bb-d790-4643-8e10-31455a1ab3a6",
+      //       amount: 2000,
+      //       reference: "optional-reference-for-split-1fcfcbe9-ba75-4eed",
+      //       description: "Platform processing fee",
+      //       feeSource: true,
+      //       refundable: false
+      //   )
+      // ]
+  );
 
   void onPaymentResult(result) {
     if (result is PaymentResponse) {

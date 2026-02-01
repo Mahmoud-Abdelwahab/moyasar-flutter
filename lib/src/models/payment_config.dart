@@ -67,6 +67,11 @@ class PaymentConfig {
   /// Contact your account manager to enable this feature.
   List<PaymentSplit>? splits;
 
+  /// Optional base URL for the API endpoint.
+  /// Default is 'https://api.moyasar.com/v1/payments'.
+  /// For staging, use 'https://apimig.moyasar.com/v1/payments'.
+  String? baseUrl;
+
   PaymentConfig(
       {required this.publishableApiKey,
       required this.amount,
@@ -77,7 +82,8 @@ class PaymentConfig {
       this.applePay,
       this.creditCard,
       this.givenID,
-      this.splits})
+      this.splits,
+      this.baseUrl})
       : supportedNetworks = (supportedNetworks ?? const [
           PaymentNetwork.visa,
           PaymentNetwork.mada,

@@ -13,6 +13,7 @@ class PaymentRequest {
   String? givenID;
   String callbackUrl = PaymentConfig.callbackUrl;
   List<PaymentSplit>? splits;
+  String? baseUrl;
 
   PaymentRequest(
       PaymentConfig config, PaymentRequestSource paymentRequestSource) {
@@ -23,6 +24,7 @@ class PaymentRequest {
     source = paymentRequestSource;
     givenID = config.givenID;
     splits = config.splits;
+    baseUrl = config.baseUrl;
   }
 
   Map<String, dynamic> toJson() => {

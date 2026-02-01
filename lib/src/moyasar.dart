@@ -4,7 +4,7 @@ import 'package:moyasar/moyasar.dart';
 
 import 'models/payment_type.dart';
 
-const version = '2.1.3';
+const version = '2.2.0';
 
 /// Payment service.
 ///

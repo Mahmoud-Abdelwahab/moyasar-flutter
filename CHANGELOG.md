@@ -1,3 +1,9 @@
+## 2.2.0
+
+Split Payment Feature 🐛
+
+- [Moyasar] Adding Split Payment support.
+
 ## 2.1.3
 
 STC UI Customization 🐛

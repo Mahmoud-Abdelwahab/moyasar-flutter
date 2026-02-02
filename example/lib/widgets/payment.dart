@@ -25,6 +25,16 @@ class PaymentMethods extends StatelessWidget {
           )
         else
           const SizedBox.shrink(),
+        if (Platform.isAndroid)
+          Padding(
+            padding: const EdgeInsets.symmetric(vertical: 10),
+            child: SamsungPay(
+              config: paymentConfig,
+              onPaymentResult: onPaymentResult,
+            ),
+          )
+        else
+          const SizedBox.shrink(),
         CreditCard(
           config: paymentConfig,
           onPaymentResult: onPaymentResult,

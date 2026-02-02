@@ -40,6 +40,11 @@ class _CoffeeShopState extends State<CoffeeShop> {
           label: 'Blue Coffee Beans',
           manual: false,
           saveCard: false),
+      samsungPay: SamsungPayConfig(
+          merchantId: '1b7da11c1d1945d1a21e3b',
+          label: 'Blue Coffee Beans',
+          manual: false,
+          saveCard: false),
       // splits: [
       //   PaymentSplit(
       //       recipientId: "7d2d0797-a2be-40fe-bb1b-1fdec9824c95",

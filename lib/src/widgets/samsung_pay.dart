@@ -1,6 +1,5 @@
 import 'dart:convert';
 import 'dart:io';
-import 'package:flutter/foundation.dart';
 
 import 'package:flutter/material.dart';
 import 'package:moyasar/moyasar.dart';
@@ -69,10 +68,6 @@ class _SamsungPayState extends State<SamsungPay> {
 
   void _initSamsungPay() {
     if (!Platform.isAndroid || widget.config.samsungPay == null) {
-      if (kDebugMode) {
-        debugPrint(
-            'Samsung Pay: Hidden - Platform.isAndroid=${Platform.isAndroid}, samsungPay configured=${widget.config.samsungPay != null}');
-      }
       setState(() {
         _isReady = false;
         _isChecking = false;
@@ -93,22 +88,12 @@ class _SamsungPayState extends State<SamsungPay> {
     _samsungPay.getSamsungPayStatus(
       StatusListener(
         onSuccess: (status, bundle) {
-          // SPAY_READY = 2; plugin may pass as String or int
-          final ready = status.toString() == '2';
-          if (kDebugMode) {
-            debugPrint(
-                'Samsung Pay: getSamsungPayStatus onSuccess - status=$status (type: ${status.runtimeType}), ready=$ready');
-          }
           setState(() {
-            _isReady = ready;
+            _isReady = status.toString() == '2'; // SPAY_READY
             _isChecking = false;
           });
         },
         onFail: (errorCode, bundle) {
-          if (kDebugMode) {
-            debugPrint(
-                'Samsung Pay: getSamsungPayStatus onFail - errorCode=$errorCode, bundle=$bundle');
-          }
           setState(() {
             _isReady = false;
             _isChecking = false;
@@ -215,15 +200,6 @@ class _SamsungPayState extends State<SamsungPay> {
   @override
   Widget build(BuildContext context) {
     if (!Platform.isAndroid) {
-      if (kDebugMode) {
-        return const Padding(
-          padding: EdgeInsets.symmetric(vertical: 8),
-          child: Text(
-            'Samsung Pay: iOS - not available (Android only)',
-            style: TextStyle(fontSize: 12, color: Colors.grey),
-          ),
-        );
-      }
       return const SizedBox.shrink();
     }
 
@@ -238,17 +214,6 @@ class _SamsungPayState extends State<SamsungPay> {
     }
 
     if (!_isReady || widget.config.samsungPay == null) {
-      // Show helpful message in debug so user knows why button is hidden
-      if (kDebugMode) {
-        return Padding(
-          padding: const EdgeInsets.symmetric(vertical: 8),
-          child: Text(
-            'Samsung Pay: Not available (need Samsung device with Samsung Pay set up). Check console for status.',
-            style: TextStyle(fontSize: 12, color: Colors.grey[600]),
-            textAlign: TextAlign.center,
-          ),
-        );
-      }
       return const SizedBox.shrink();
     }
 

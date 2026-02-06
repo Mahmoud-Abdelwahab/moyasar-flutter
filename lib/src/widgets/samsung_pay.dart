@@ -203,17 +203,8 @@ class _SamsungPayState extends State<SamsungPay> {
       return const SizedBox.shrink();
     }
 
-    if (_isChecking) {
-      return const Padding(
-        padding: EdgeInsets.symmetric(vertical: 10),
-        child: SizedBox(
-          height: 50,
-          child: Center(child: CircularProgressIndicator()),
-        ),
-      );
-    }
-
-    if (!_isReady || widget.config.samsungPay == null) {
+    // Hide until Samsung Pay status is ready; no loading indicator
+    if (_isChecking || !_isReady || widget.config.samsungPay == null) {
       return const SizedBox.shrink();
     }
 

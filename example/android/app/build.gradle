@@ -40,14 +40,22 @@ android {
     }
 
     defaultConfig {
-        // Must match React Native example (com.mysr.spay) - Samsung Pay service ID is registered for this package
-        applicationId "com.mysr.spay"
-        // You can update the following values to match your application needs.
-        // For more information, see: https://docs.flutter.dev/deployment/android#reviewing-the-build-configuration.
         minSdkVersion flutter.minSdkVersion
         targetSdkVersion flutter.targetSdkVersion
         versionCode flutterVersionCode.toInteger()
         versionName flutterVersionName
+    }
+
+    flavorDimensions "app"
+    productFlavors {
+        default_ {
+            dimension "app"
+            applicationId "com.example.coffee_flutter"
+        }
+        spay {
+            dimension "app"
+            applicationId "com.mysr.spay"
+        }
     }
 
     buildTypes {

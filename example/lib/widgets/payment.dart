@@ -25,6 +25,10 @@ class PaymentMethods extends StatelessWidget {
           )
         else
           const SizedBox.shrink(),
+        SamsungPay(
+          config: paymentConfig,
+          onPaymentResult: onPaymentResult,
+        ),
         CreditCard(
           config: paymentConfig,
           onPaymentResult: onPaymentResult,

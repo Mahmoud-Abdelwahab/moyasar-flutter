@@ -24,6 +24,10 @@
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
+        <!-- Samsung Pay SDK API level (required by samsung_pay_sdk_flutter) -->
+        <meta-data
+            android:name="spay_sdk_api_level"
+            android:value="2.22" />
         <!-- Don't delete the meta-data below.
              This is used by the Flutter tool to generate GeneratedPluginRegistrant.java -->
         <meta-data

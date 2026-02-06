@@ -29,17 +29,28 @@ class CoffeeShop extends StatefulWidget {
 
 class _CoffeeShopState extends State<CoffeeShop> {
   final paymentConfig = PaymentConfig(
-      publishableApiKey: 'pk_test_r6eZg85QyduWZ7PNTHT56BFvZpxJgNJ2PqPMDoXA',
-      amount: 100, // SAR 1
-      description: 'order #1324',
+      publishableApiKey: 'pk_test_U38gMHTgVv4wYCd35Zk1JSEd1ZyMYyA9oQ7T4rKa',
+      amount: 20001, // SAR 200.01
+      description: 'Test payment',
       metadata: {'size': '250g', 'code': 255},
-     // supportedNetworks: [PaymentNetwork.mada, PaymentNetwork.visa ],
+      merchantCountryCode: 'SA',
+      supportedNetworks: [
+        PaymentNetwork.mada,
+        PaymentNetwork.visa,
+        PaymentNetwork.masterCard,
+        PaymentNetwork.amex
+      ],
       creditCard: CreditCardConfig(saveCard: false, manual: false),
       applePay: ApplePayConfig(
-          merchantId: 'merchant.com.mysr.apple',
-          label: 'Blue Coffee Beans',
+          merchantId: 'merchant.mysr.aalrabiah',
+          label: 'Test Apple Pay from app',
           manual: false,
           saveCard: false),
+      samsungPay: SamsungPayConfig(
+          serviceId: 'ea810dafb758408fa530b1',
+          merchantName: 'Test Samsung Pay from app',
+          orderNumber: 'c553ed70-fb79-487c-b3d2-15aca6aff90c',
+          manual: false),
       // splits: [
       //   PaymentSplit(
       //       recipientId: "7d2d0797-a2be-40fe-bb1b-1fdec9824c95",

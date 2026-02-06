@@ -42,8 +42,8 @@ class _CoffeeShopState extends State<CoffeeShop> {
       ],
       creditCard: CreditCardConfig(saveCard: false, manual: false),
       applePay: ApplePayConfig(
-          merchantId: 'merchant.mysr.aalrabiah',
-          label: 'Test Apple Pay from app',
+          merchantId: 'merchant.com.mysr.apple',
+          label: 'Blue Coffee Beans',
           manual: false,
           saveCard: false),
       samsungPay: SamsungPayConfig(

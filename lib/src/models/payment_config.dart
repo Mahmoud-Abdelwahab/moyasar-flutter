@@ -1,5 +1,6 @@
 import 'package:moyasar/src/models/apple_pay_config.dart';
 import 'package:moyasar/src/models/credit_card_config.dart';
+import 'package:moyasar/src/models/payment_split.dart';
 
 /// Supported Networks: [PaymentNetwork.amex, PaymentNetwork.visa, PaymentNetwork.mada, PaymentNetwork.masterCard]
 enum PaymentNetwork {
@@ -61,6 +62,16 @@ class PaymentConfig {
   /// given_id It is going be the ID of the created payment.
   String? givenID;
 
+  /// Optional payment splits for dividing payment amount among recipients.
+  /// Only available for aggregation clients. Splitting on non-aggregated payments will be ignored.
+  /// Contact your account manager to enable this feature.
+  List<PaymentSplit>? splits;
+
+  /// Optional base URL for the API endpoint.
+  /// Default is 'https://api.moyasar.com/v1/payments'.
+  /// For staging, use 'https://apimig.moyasar.com/v1/payments'.
+  String? baseUrl;
+
   PaymentConfig(
       {required this.publishableApiKey,
       required this.amount,
@@ -70,7 +81,9 @@ class PaymentConfig {
       List<PaymentNetwork>? supportedNetworks,
       this.applePay,
       this.creditCard,
-      this.givenID})
+      this.givenID,
+      this.splits,
+      this.baseUrl})
       : supportedNetworks = (supportedNetworks ?? const [
           PaymentNetwork.visa,
           PaymentNetwork.mada,

@@ -4,7 +4,7 @@ import 'package:moyasar/moyasar.dart';
 
 import 'models/payment_type.dart';
 
-const version = '2.1.3';
+const version = '2.2.0';
 
 /// Payment service.
 ///
@@ -16,9 +16,10 @@ class Moyasar {
       {required String apiKey, required PaymentRequest paymentRequest}) async {
     final headers = buildRequestHeaders(apiKey);
     final body = jsonEncode(paymentRequest.toJson());
+    final url = paymentRequest.baseUrl ?? apiUrl;
 
     final res = await http
-        .post(Uri.parse(apiUrl), headers: headers, body: body)
+        .post(Uri.parse(url), headers: headers, body: body)
         .onError((error, stackTrace) =>
             http.Response(jsonEncode({'type': NetworkError.type}), 400))
         .timeout(const Duration(seconds: 45),

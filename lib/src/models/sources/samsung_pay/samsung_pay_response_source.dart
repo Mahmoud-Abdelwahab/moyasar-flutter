@@ -6,12 +6,19 @@ class SamsungPayPaymentResponseSource implements PaymentResponseSource {
   @override
   PaymentType type = PaymentType.samsungpay;
 
-  /// The [number] is masked (e.g. "XXXX-XXXX-XXXX-1115").
+  /// The masked card number (e.g. "XXXX-XXXX-XXXX-1115").
   final String number;
 
+  /// The gateway transaction ID.
   final String gatewayId;
+
+  /// Optional reference number from the gateway.
   final String? referenceNumber;
+
+  /// Optional token for saved card flows.
   final String? token;
+
+  /// Optional message from the gateway.
   final String? message;
 
   SamsungPayPaymentResponseSource({

@@ -8,9 +8,13 @@ class SamsungPayPaymentRequestSource implements PaymentRequestSource {
   @override
   PaymentType type = PaymentType.samsungpay;
 
+  /// The Samsung Pay token returned by the Samsung Pay SDK.
   final String samsungPayToken;
+
+  /// Whether to use manual capture (authorize only) or auto capture.
   final String manualPayment;
 
+  /// Creates a Samsung Pay payment request source.
   SamsungPayPaymentRequestSource({
     required this.samsungPayToken,
     bool manualPayment = false,

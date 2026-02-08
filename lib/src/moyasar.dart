@@ -105,7 +105,7 @@ class Moyasar {
   }
 }
 
-Map<String, String> buildRequestHeaders(apiKey) {
+Map<String, String> buildRequestHeaders(String apiKey) {
   return {
     'Content-type': 'application/json',
     'Authorization': 'Basic ${base64Encode(utf8.encode(apiKey))}',

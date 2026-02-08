@@ -1,9 +1,11 @@
-import 'package:moyasar/moyasar.dart';
 import 'package:moyasar/src/models/payment_type.dart';
 import 'package:moyasar/src/models/payment_split.dart';
+import 'package:moyasar/src/models/sources/card/card_response_source.dart';
+import 'package:moyasar/src/models/sources/apple_pay/apple_pay_response_source.dart';
+import 'package:moyasar/src/models/sources/stc/stc_response_source.dart';
 import 'package:moyasar/src/models/sources/samsung_pay/samsung_pay_response_source.dart';
 
-/// Moyasar API response for processing a payment. for processing a payment.
+/// Moyasar API response for processing a payment.
 class PaymentResponse {
   late String id;
   late PaymentStatus status;

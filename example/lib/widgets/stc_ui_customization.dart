@@ -143,6 +143,7 @@ class _STCPayState extends State<STCPay> {
                       }
                     } else {
                       // Verify OTP
+                      final navigator = Navigator.of(context);
                       final otpRequest = OtpRequestSource(
                         otpValue: otpController.text,
                       );
@@ -152,7 +153,7 @@ class _STCPayState extends State<STCPay> {
                       );
                       if (mounted) {
                         widget.onPaymentResult(result);
-                        Navigator.pop(context);
+                        navigator.pop();
                       }
                     }
                   } catch (e) {

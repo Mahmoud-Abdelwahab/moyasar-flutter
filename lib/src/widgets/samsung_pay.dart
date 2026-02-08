@@ -34,11 +34,14 @@ String _extractToken(String paymentCredential) {
   return paymentCredential;
 }
 
-/// The widget that shows the Samsung Pay button.
+/// A widget that displays the Samsung Pay button.
 ///
-/// Uses [samsung_pay_sdk_flutter] package. Only shown on Android Samsung devices
-/// when Samsung Pay is configured and ready.
+/// Uses [samsung_pay_sdk_flutter] for native integration. The button is only
+/// shown on Android Samsung devices when Samsung Pay is configured and ready.
+///
+/// Requires [PaymentConfig.samsungPay] to be set.
 class SamsungPay extends StatefulWidget {
+  /// Creates a Samsung Pay button widget.
   SamsungPay({
     super.key,
     required this.config,

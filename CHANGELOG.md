@@ -1,3 +1,14 @@
+## 2.3.0
+
+Samsung Pay Support 🚀
+
+- [Samsung Pay] Add Samsung Pay support for Android (Samsung devices only)
+- [Samsung Pay] Uses samsung_pay_sdk_flutter for native integration
+- [Samsung Pay] Add SamsungPayConfig with serviceId, merchantName, orderNumber, manual
+- [PaymentConfig] Add samsungPay config and merchantCountryCode for Samsung Pay
+- [Example] Add product flavors: default_ (Apple Pay) and spay (Samsung Pay demo)
+- [Example] Add CONFIGURATION_GUIDE.md for bundle ID setup
+
 ## 2.2.0
 
 Split Payment Feature 🐛

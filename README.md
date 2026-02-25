@@ -28,6 +28,8 @@ Complete the following steps to easily accept Apple Pay payments:
 
 Samsung Pay is supported on Samsung Android devices only. Add `spay_sdk_api_level` meta-data to your AndroidManifest and configure `SamsungPayConfig` in `PaymentConfig`. See [Samsung Pay Basic Integration](https://docs.moyasar.com/guides/samsung-pay/basic-integration/).
 
+**Samsung Pay plugin:** This SDK uses Samsung’s **official** Flutter plugin from `third_party/SamsungPaySDKFlutterPlugin/Libs/samsungpaysdkflutter_v1.01.00` (path dependency). No app-level override is required; the example and any app depending on `moyasar` get the official plugin transitively. **MADA:** The official plugin’s Dart `Brand` enum may not include MADA; when it does, we will add `brands.add(Brand.MADA);` in `samsung_pay.dart`.
+
 #### **Accepting Payments in Android**
 
 Due to depending on the `pay` package, make sure to set the correct minSdkVersion in android/app/build.gradle if it was previously lower than 21:

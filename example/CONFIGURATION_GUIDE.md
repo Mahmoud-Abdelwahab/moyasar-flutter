@@ -58,6 +58,29 @@ For your own app, use **one bundle identifier** across platforms:
 | Android  | com.example.coffee_flutter  | com.mysr.spay            |
 | iOS      | com.moyasar.coffeeFlutterVeryUnique | *(iOS has no flavors; always uses this)* |
 
+### Running from Android Studio (fix "Gradle build failed to produce an .apk file")
+
+When you run from Android Studio using the Run/Debug button **without** a flavor, you get:
+
+> Gradle build failed to produce an .apk file. It's likely that this file was generated under .../build, but the tool couldn't find it.
+
+**Fix:** Add the flavor to the Run Configuration so the IDE passes it:
+
+1. **Run → Edit Configurations…**
+2. Select your **Flutter** run configuration (or create one for the `example` app).
+3. In **Additional run args** (or **Build flavor**), add:
+   - `--flavor default_` for Apple Pay / default, or  
+   - `--flavor spay` for Samsung Pay.
+4. Click **Apply** then **OK**.
+
+After that, the Run/Debug button will use the chosen flavor and the APK will be found. (From the terminal, `flutter run --flavor spay` already works.)
+
+**Or use the pre-made run configs:** The project includes two Run Configurations you can select from the dropdown next to the Run button:
+- **Flutter (default_)** – Apple Pay / default flavor
+- **Flutter (spay)** – Samsung Pay flavor
+
+If you don’t see them, use **Run → Edit Configurations…** and add the flavor in **Build flavor** or **Additional run args** as above.
+
 ### If iOS / Apple Pay Stopped Working
 
 1. **Confirm bundle ID** in Xcode: `Runner` → Target → General → Bundle Identifier = `com.moyasar.coffeeFlutterVeryUnique`

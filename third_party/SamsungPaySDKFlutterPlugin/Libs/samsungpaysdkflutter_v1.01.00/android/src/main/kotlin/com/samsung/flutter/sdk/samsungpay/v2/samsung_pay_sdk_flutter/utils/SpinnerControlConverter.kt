@@ -13,41 +13,36 @@ import java.util.ArrayList
 
 
 object SpinnerControlConverter {
-    fun getSpinnerControl (spinnerControlJsonString: String, sheetUpdatedListener: SheetUpdatedListener?): SpinnerControl {
+    fun getSpinnerControl(spinnerControlJsonString: String, sheetUpdatedListener: SheetUpdatedListener?): SpinnerControl {
         val spinnerControlPojo = Gson().fromJson(spinnerControlJsonString, SpinnerControlPojo::class.java)
-
-        val itemList: ArrayList<SheetItem> = spinnerControlPojo.getSheetItem();
-        val firstItem = spinnerControlPojo.getSheetItem().elementAt(0)
+        val itemList = spinnerControlPojo.getSheetItem()
+        val firstItem = itemList[0]
         val spinnerControl = SpinnerControl(
             spinnerControlPojo.controlId ?: "",
             firstItem.title ?: "",
             firstItem.sheetItemType
         )
-
         for (i in 1 until itemList.size) {
             val sheetItem = itemList[i]
-            spinnerControl.addItem(sheetItem.id,sheetItem.sValue)
+            spinnerControl.addItem(sheetItem.id, sheetItem.sValue)
         }
-        if(spinnerControlPojo.selectedItemId!=null)
-            spinnerControl.selectedItemId=spinnerControlPojo.selectedItemId
+        spinnerControlPojo.selectedItemId?.let { spinnerControl.selectedItemId = it }
         spinnerControl.sheetUpdatedListener = sheetUpdatedListener
         return spinnerControl
     }
-    fun makeSpinnerControlJson(spinnerControl: SpinnerControl): JsonObject
-    {
-        var sheetItem = JsonArray()
 
-        spinnerControl.items.forEach{
-
-            if(it.sheetItemType!=null)
-            {
+    fun makeSpinnerControlJson(spinnerControl: SpinnerControl): JsonObject {
+        val sheetItem = JsonArray()
+        spinnerControl.items.forEach {
+            if (it.sheetItemType != null) {
                 sheetItem.add(Gson().toJson(SheetItemPojo(it.id, it.title, null, null, it.sheetItemType.toString())))
-            }
-            else
-            {
+            } else {
                 sheetItem.add(Gson().toJson(SheetItemPojo(it.id, null, it.sValue, null)))
             }
         }
-        return Gson().fromJson(Gson().toJson(SpinnerControlPojo(SheetControl.Controltype.SPINNER.name, spinnerControl.controlId, sheetItem,spinnerControl.selectedItemId)), JsonObject::class.java)
+        return Gson().fromJson(
+            Gson().toJson(SpinnerControlPojo(SheetControl.Controltype.SPINNER.name, spinnerControl.controlId, sheetItem, spinnerControl.selectedItemId)),
+            JsonObject::class.java
+        )
     }
 }

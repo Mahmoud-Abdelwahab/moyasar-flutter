@@ -24,7 +24,7 @@ import com.samsung.flutter.sdk.samsungpay.v2.samsung_pay_sdk_flutter.utils.AddCa
 import com.samsung.flutter.sdk.samsungpay.v2.samsung_pay_sdk_flutter.utils.CustomSheetConverter
 import com.samsung.flutter.sdk.samsungpay.v2.samsung_pay_sdk_flutter.utils.CustomSheetPaymentInfoConverter
 import com.samsung.flutter.sdk.samsungpay.v2.samsung_pay_sdk_flutter.utils.PartnerInfoConverter
-import android.src.main.kotlin.com.samsung.flutter.sdk.samsungpay.v2.samsung_pay_sdk_flutter.pojo.RequestCardInfoPojo
+import com.samsung.flutter.sdk.samsungpay.v2.samsung_pay_sdk_flutter.pojo.RequestCardInfoPojo
 import io.flutter.Log
 import io.flutter.embedding.engine.plugins.FlutterPlugin
 import io.flutter.plugin.common.MethodCall

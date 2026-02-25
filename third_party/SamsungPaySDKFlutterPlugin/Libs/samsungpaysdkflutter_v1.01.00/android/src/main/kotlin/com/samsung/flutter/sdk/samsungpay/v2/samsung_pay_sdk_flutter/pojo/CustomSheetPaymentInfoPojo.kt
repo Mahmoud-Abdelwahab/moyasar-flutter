@@ -71,26 +71,26 @@ data class CustomSheetPaymentInfoPojo(
 		return brandList
 	}
 
-	fun getBundle(): Bundle {
-		val bundleData= Bundle()
-		extraPaymentInfo?.keySet()?.forEach {
-			bundleData.putString(it, extraPaymentInfo.get(it)?.asString)
-		}
-		return bundleData
-	}
-	private fun getCardBrandAgainstName(brandName : String) : Brand{
-		return when(brandName){
-			Brand.AMERICANEXPRESS.name -> Brand.AMERICANEXPRESS
-			Brand.MASTERCARD.name -> Brand.MASTERCARD
-			Brand.VISA.name -> Brand.VISA
-			Brand.DISCOVER.name -> Brand.DISCOVER
-			Brand.CHINAUNIONPAY.name -> Brand.CHINAUNIONPAY
-			Brand.UNKNOWN_CARD.name -> Brand.UNKNOWN_CARD
-			Brand.OCTOPUS.name -> Brand.OCTOPUS
-			Brand.ECI.name -> Brand.ECI
-			Brand.PAGOBANCOMAT.name -> Brand.PAGOBANCOMAT
-			Brand.MADA.name -> Brand.MADA
-			else -> Brand.UNKNOWN_CARD
-		}
-	}
+    fun getBundle(): Bundle {
+        val bundleData = Bundle()
+        extraPaymentInfo?.keySet()?.forEach {
+            bundleData.putString(it, extraPaymentInfo.get(it)?.asString)
+        }
+        return bundleData
+    }
+    private fun getCardBrandAgainstName(brandName: String): Brand {
+        return when (brandName) {
+            Brand.AMERICANEXPRESS.name -> Brand.AMERICANEXPRESS
+            Brand.MASTERCARD.name -> Brand.MASTERCARD
+            Brand.VISA.name -> Brand.VISA
+            Brand.DISCOVER.name -> Brand.DISCOVER
+            Brand.CHINAUNIONPAY.name -> Brand.CHINAUNIONPAY
+            Brand.UNKNOWN_CARD.name -> Brand.UNKNOWN_CARD
+            Brand.OCTOPUS.name -> Brand.OCTOPUS
+            Brand.ECI.name -> Brand.ECI
+            Brand.PAGOBANCOMAT.name -> Brand.PAGOBANCOMAT
+            Brand.MADA.name -> Brand.MADA
+            else -> Brand.UNKNOWN_CARD
+        }
+    }
 }

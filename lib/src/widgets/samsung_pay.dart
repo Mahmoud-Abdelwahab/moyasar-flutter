@@ -123,7 +123,6 @@ class _SamsungPayState extends State<SamsungPay> {
           brands.add(Brand.AMERICANEXPRESS);
           break;
         case 'mada':
-          // Brand.MADA is in Dart enum; native SpaySdk.Brand.MADA requires a newer Samsung JAR.
           brands.add(Brand.MADA);
           break;
       }

@@ -15,7 +15,7 @@ class AddressControlConverter {
         sheetUpdatedListener: SheetUpdatedListener?
     ): AddressControl {
         val addressControlPojo = Gson().fromJson(addressControlJsonString, AddressControlPojo::class.java)
-        val addressControl= AddressControl(
+        val addressControl = AddressControl(
             addressControlPojo.controlId ?: "",
             addressControlPojo.getSheetItem().getSheetItemType()
         )
@@ -32,12 +32,8 @@ class AddressControlConverter {
         return addressControl
     }
 
-    fun getAddressControlJsonObject(addressControl: AddressControl?): JsonObject{
-        var isSheetUpdatedListener = false
-        if(addressControl?.sheetUpdatedListener != null)
-            isSheetUpdatedListener = true
-        else
-            isSheetUpdatedListener = false
+    fun getAddressControlJsonObject(addressControl: AddressControl?): JsonObject {
+        val isSheetUpdatedListener = addressControl?.sheetUpdatedListener != null
 
         val gson: Gson = GsonBuilder()
             .serializeNulls()
@@ -64,7 +60,6 @@ class AddressControlConverter {
             addressControl?.displayOption,
             addressControl?.errorCode, isSheetUpdatedListener)
 
-        val addressControlJsonObject = gson.toJsonTree(addressControlPojo, AddressControlPojo::class.java).asJsonObject
-       return  addressControlJsonObject
+        return gson.toJsonTree(addressControlPojo, AddressControlPojo::class.java).asJsonObject
     }
 }

@@ -9,22 +9,18 @@ import com.samsung.android.sdk.samsungpay.v2.payment.sheet.SheetItemType
 import com.samsung.flutter.sdk.samsungpay.v2.samsung_pay_sdk_flutter.pojo.SheetItemPojo
 
 object AmountBoxControlConverter {
-    fun getAmountBoxControl(amountBoxControlJsonString: String):AmountBoxControl {
+    fun getAmountBoxControl(amountBoxControlJsonString: String): AmountBoxControl {
         val amountBoxControlPojo = Gson().fromJson(amountBoxControlJsonString, AmountBoxControlPojo::class.java)
-
-
-        var itemList = ArrayList<SheetItem>()
-        itemList = amountBoxControlPojo.getSheetItem()
-
-        val amountBoxControl= AmountBoxControl(
+        val itemList = amountBoxControlPojo.getSheetItem()
+        val amountBoxControl = AmountBoxControl(
             amountBoxControlPojo.controlId ?: "",
             amountBoxControlPojo.currencyCode ?: ""
         )
 
         for (sheetItem in itemList) {
-            if(sheetItem.sheetItemType == SheetItemType.AMOUNT_TOTAL){
+            if (sheetItem.sheetItemType == SheetItemType.AMOUNT_TOTAL) {
                 amountBoxControl.setAmountTotal(sheetItem.dValue, FORMAT_TOTAL_PRICE_ONLY)
-            }else{
+            } else {
                 amountBoxControl.addItem(sheetItem.id, sheetItem.title, sheetItem.dValue, sheetItem.sValue)
             }
         }

@@ -5,3 +5,7 @@ This folder contains the **official** Samsung Pay SDK Flutter Plugin downloaded 
 ## What’s here
 
 - **`Libs/samsungpaysdkflutter_v1.01.00`** — the plugin. The moyasar SDK depends on this path for Samsung Pay.
+
+## MADA support
+
+The plugin uses **samsungpay_2.22.00.jar** (the same as **moyasar-android-sdk** in `moyasar-android-sdk/sdk/libs/`). This version includes `SpaySdk.Brand.MADA`, so MADA is supported in Flutter: use `supportedNetworks: ['mada', ...]` in your Samsung Pay config and the native sheet will allow MADA cards.

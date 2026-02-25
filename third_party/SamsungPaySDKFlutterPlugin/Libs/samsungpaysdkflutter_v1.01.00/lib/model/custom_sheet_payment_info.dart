@@ -378,6 +378,8 @@ class CustomSheetPaymentInfo {
           brandlist.add(Brand.PAGOBANCOMAT);
         else if(brand == Brand.OCTOPUS.name)
           brandlist.add(Brand.OCTOPUS);
+        else if(brand == Brand.MADA.name)
+          brandlist.add(Brand.MADA);
       }
       customSheetPaymentInfo.allowedCardBrand =  brandlist;
     }

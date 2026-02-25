@@ -991,7 +991,11 @@ enum Brand {
   ///
   /// Since API Level 2.11
   ///
-  PAGOBANCOMAT
+  PAGOBANCOMAT,
+  ///
+  /// Card brand for Saudi Arabia MADA.
+  ///
+  MADA
 }
 
 ///

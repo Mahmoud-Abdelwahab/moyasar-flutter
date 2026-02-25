@@ -123,9 +123,8 @@ class _SamsungPayState extends State<SamsungPay> {
           brands.add(Brand.AMERICANEXPRESS);
           break;
         case 'mada':
-          // MADA is in Samsung's native SpaySdk.Brand but not in pub.dev
-          // samsung_pay_sdk_flutter (1.0.4). Use Samsung's official Flutter
-          // plugin (path dependency) for MADA; then add: brands.add(Brand.MADA);
+          // Brand.MADA is in Dart enum; native SpaySdk.Brand.MADA requires a newer Samsung JAR.
+          brands.add(Brand.MADA);
           break;
       }
     }

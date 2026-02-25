@@ -89,6 +89,7 @@ data class CustomSheetPaymentInfoPojo(
 			Brand.OCTOPUS.name -> Brand.OCTOPUS
 			Brand.ECI.name -> Brand.ECI
 			Brand.PAGOBANCOMAT.name -> Brand.PAGOBANCOMAT
+			Brand.MADA.name -> Brand.MADA
 			else -> Brand.UNKNOWN_CARD
 		}
 	}

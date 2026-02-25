@@ -16,7 +16,10 @@ object AmountBoxControlConverter {
         var itemList = ArrayList<SheetItem>()
         itemList = amountBoxControlPojo.getSheetItem()
 
-        val amountBoxControl= AmountBoxControl(amountBoxControlPojo.controlId,amountBoxControlPojo.currencyCode)
+        val amountBoxControl= AmountBoxControl(
+            amountBoxControlPojo.controlId ?: "",
+            amountBoxControlPojo.currencyCode ?: ""
+        )
 
         for (sheetItem in itemList) {
             if(sheetItem.sheetItemType == SheetItemType.AMOUNT_TOTAL){

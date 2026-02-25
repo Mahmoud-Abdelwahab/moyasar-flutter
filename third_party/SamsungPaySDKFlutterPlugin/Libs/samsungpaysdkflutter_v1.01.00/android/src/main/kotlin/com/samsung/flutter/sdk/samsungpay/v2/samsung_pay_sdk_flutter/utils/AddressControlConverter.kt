@@ -15,7 +15,10 @@ class AddressControlConverter {
         sheetUpdatedListener: SheetUpdatedListener?
     ): AddressControl {
         val addressControlPojo = Gson().fromJson(addressControlJsonString, AddressControlPojo::class.java)
-        val addressControl= AddressControl(addressControlPojo.controlId,addressControlPojo.getSheetItem().getSheetItemType())
+        val addressControl= AddressControl(
+            addressControlPojo.controlId ?: "",
+            addressControlPojo.getSheetItem().getSheetItemType()
+        )
         if(addressControlPojo.address != null)
             addressControl.address = AddressConverter.getAddressConverter(addressControlPojo.address.toString())
         if(addressControlPojo.sheetItem != null)

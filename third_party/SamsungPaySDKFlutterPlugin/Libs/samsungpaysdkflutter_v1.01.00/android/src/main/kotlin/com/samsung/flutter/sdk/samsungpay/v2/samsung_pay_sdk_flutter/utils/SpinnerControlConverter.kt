@@ -17,7 +17,12 @@ object SpinnerControlConverter {
         val spinnerControlPojo = Gson().fromJson(spinnerControlJsonString, SpinnerControlPojo::class.java)
 
         val itemList: ArrayList<SheetItem> = spinnerControlPojo.getSheetItem();
-        val spinnerControl = SpinnerControl(spinnerControlPojo.controlId, spinnerControlPojo.getSheetItem().elementAt(0).title,spinnerControlPojo.getSheetItem().elementAt(0).sheetItemType)
+        val firstItem = spinnerControlPojo.getSheetItem().elementAt(0)
+        val spinnerControl = SpinnerControl(
+            spinnerControlPojo.controlId ?: "",
+            firstItem.title ?: "",
+            firstItem.sheetItemType
+        )
 
         for (i in 1 until itemList.size) {
             val sheetItem = itemList[i]
